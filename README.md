@@ -18,15 +18,20 @@ A cross-platform POSIX build script that compiles and installs three side-by-sid
 | **`pony-lsp` / `pony-lint` / `pony-doc`** | Self-hosted tools built with `PONY_THIN_LTO=1` | IDE language server, linter, and docs generator |
 
 ## Usage
+## Usage
 
-```bash
-git clone --recurse-submodules https://github.com/gInAmOsLaMi/ponyc-toolchain-builder.git
-cd ponyc
-# Place build-ponyc-suite.sh here, then run:
-chmod +x build-ponyc-suite.sh
-./build-ponyc-suite.sh
-```
+1. Clone the official `ponyc` source repository with submodules:
+   ```bash
+   git clone --recurse-submodules ttps://github.com/gInAmOsLaMi/ponyc-toolchain-builder.git
+   cd ponyc
+   ```
 
+2. Download `build-ponyc-suite.sh` into the root of the `ponyc` directory and run it:
+   ```bash
+   curl -fsSL https://githubusercontent.com -o build-ponyc-suite.sh
+   chmod +x build-ponyc-suite.sh
+   ./build-ponyc-suite.sh
+   ```
 *(Tip: Override variables like `PREFIX_BASE` or `BIN_DIR` for user-local installations without `sudo`. For full parameter tables and extended options, refer to your script implementation.)*
 
 ## Acknowledgments
