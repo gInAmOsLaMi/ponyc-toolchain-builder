@@ -18,7 +18,6 @@ A cross-platform POSIX build script that compiles and installs three side-by-sid
 | **`pony-lsp` / `pony-lint` / `pony-doc`** | Self-hosted tools built with `PONY_THIN_LTO=1` | IDE language server, linter, and docs generator |
 
 ## Usage
-## Usage
 
 1. Clone the official `ponyc` source repository with submodules:
    ```bash
