@@ -28,7 +28,7 @@ A cross-platform POSIX build script that compiles and installs three side-by-sid
 
 2. Download `build-ponyc-suite.sh` into the root of the `ponyc` directory and run it:
    ```bash
-   curl -fsSL https://githubusercontent.com -o build-ponyc-suite.sh
+   curl -fsSL https://raw.githubusercontent.com/gInAmOsLaMi/ponyc-toolchain-builder/refs/heads/main/build-ponyc-suite.sh -o build-ponyc-suite.sh
    chmod +x build-ponyc-suite.sh
    ./build-ponyc-suite.sh
    ```
