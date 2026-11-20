@@ -28,3 +28,10 @@ chmod +x build-ponyc-suite.sh
 ```
 
 *(Tip: Override variables like `PREFIX_BASE` or `BIN_DIR` for user-local installations without `sudo`. For full parameter tables and extended options, refer to your script implementation.)*
+
+## Acknowledgments
+
+- Built for the [Pony programming language](https://ponylang.io) and the official [`ponylang/ponyc`](https://github.com) compiler.
+- Build flags, sanitizer combinations, and platform presets are derived from the official [Building `ponyc` from Source](https://www.ponylang.io/contribute/compiler/building-ponyc-from-source/) and [Custom `ponyc` Builds](https://ponylang.io/use/compiler/custom-ponyc-builds/) documentation.
+- Special thanks to the **Pony Developers & Contributors** for maintaining the CMake presets and `PonyUses.cmake` build infrastructure.
+
