@@ -31,7 +31,7 @@ chmod +x build-ponyc-suite.sh
 
 ## Acknowledgments
 
-- Built for the [Pony programming language](https://ponylang.io) and the official [`ponylang/ponyc`](https://github.com) compiler.
+- Built for the [Pony programming language](https://ponylang.io) and the official [`ponylang/ponyc`](https://github.com/ponylang/ponyc) compiler.
 - Build flags, sanitizer combinations, and platform presets are derived from the official [Building `ponyc` from Source](https://www.ponylang.io/contribute/compiler/building-ponyc-from-source/) and [Custom `ponyc` Builds](https://ponylang.io/use/compiler/custom-ponyc-builds/) documentation.
 - Special thanks to the **Pony Developers & Contributors** for maintaining the CMake presets and `PonyUses.cmake` build infrastructure.
 
