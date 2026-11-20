@@ -21,7 +21,7 @@ A cross-platform POSIX build script that compiles and installs three side-by-sid
 
 1. Clone the official `ponyc` source repository with submodules:
    ```bash
-   git clone --recurse-submodules ttps://github.com/gInAmOsLaMi/ponyc-toolchain-builder.git
+   git clone --recurse-submodules https://github.com/gInAmOsLaMi/ponyc-toolchain-builder.git
    cd ponyc
    ```
 
