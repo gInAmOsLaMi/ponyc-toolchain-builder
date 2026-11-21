@@ -6,7 +6,7 @@ A cross-platform POSIX build script that compiles and installs three side-by-sid
 
 - **OS, Distro & Architecture Auto-Detection:** Automatically configures CMake presets, compilers, bitcode (`-DPONY_RUNTIME_BITCODE`), and flags for Linux, FreeBSD, OpenBSD, DragonFly BSD, and macOS.
 - **Smart Dependency Verification & Auto-Install:** Checks for required CLI tools and dev headers and installs missing packages automatically via system package managers (`apt`, `dnf`, `pacman`, `apk`, `zypper`, `pkg`, `pkg_add`, `brew`).
-- **Dynamic CMake Scanner & 13-Stage Progress UI:** Reads `cmake/PonyUses.cmake` at runtime, displays 13-stage progress bars (`[1/13]` to `[13/13]`), handles self-healing LLVM caches, and supports both interactive and unattended CI environments (`INTERACTIVE=0`).
+- **Dynamic CMake Scanner & 13-Stage Progress UI:** Reads `cmake/PonyUses.cmake` at runtime, displays 13-stage progress bars (`[1/13]` to `[13/13]`), handles self-healing LLVM caches, and supports both interactive selection (full suite, or choose each toolchain and instrumentation option) and unattended CI environments (`INTERACTIVE=0`).
 
 ## Included Toolchains & Binaries
 
@@ -17,12 +17,18 @@ A cross-platform POSIX build script that compiles and installs three side-by-sid
 | **`ponyc`** | Clean release preset (`PONY_USE_LTO=ON`, no sanitizers) | Production and release builds with LTO |
 | **`pony-lsp` / `pony-lint` / `pony-doc`** | Self-hosted tools built with `PONY_THIN_LTO=1` | IDE language server, linter, and docs generator |
 
+> **Note:** ponyc's CMake install rules install `ponylink` and all six self-hosted tool binaries unconditionally, so every toolchain is built with the full `ALL` target before `cmake --install` runs — a ponyc-only build cannot be installed. Only `pony-lsp`, `pony-lint`, and `pony-doc` are symlinked into `BIN_DIR`; `pony-dep`, `pony-agent-server`, and `pony-mutate` remain available in the versioned install tree.
+
 ## Usage
 
 1. Clone the official `ponyc` source repository with submodules:
    ```bash
    git clone --recurse-submodules https://github.com/ponylang/ponyc.git
    cd ponyc
+   ```
+   Already have a clone without submodules? From the `ponyc` repository root, fetch them before building:
+   ```bash
+   git submodule update --init --recursive
    ```
 
 2. Download `build-ponyc-suite.sh` into the root of the `ponyc` directory and run it:
@@ -32,6 +38,15 @@ A cross-platform POSIX build script that compiles and installs three side-by-sid
    ./build-ponyc-suite.sh
    ```
 *(Tip: Override variables like `PREFIX_BASE` or `BIN_DIR` for user-local installations without `sudo`. For full parameter tables and extended options, refer to your script implementation.)*
+
+### Interactive Selection
+
+When run from a terminal, the script prompts for:
+
+- **Full Suite** — ASan, TSan, and release toolchains, with every detected instrumentation option enabled.
+- **Custom Selection** — choose which toolchains to build, then toggle each instrumentation option (`undefined_behavior_sanitizer`, `coverage`, `systematic_testing`, `runtimestats`, `runtimestats_messages`, `reach_instrument`).
+
+The self-hosted tools are always built because ponyc's install rules require them (see the note above); they are not a selectable option.
 
 ## Configuration & Environment Variables
 
@@ -54,14 +69,14 @@ You can customize the installation paths, build behavior, and CI automation by p
 INTERACTIVE=0 ./build-ponyc-suite.sh
 
 # User-local installation without sudo
-PREFIX_BASE="\(HOME/.local/opt" BIN_DIR="\)HOME/.local/bin" ./build-ponyc-suite.sh
+PREFIX_BASE="$HOME/.local/opt" BIN_DIR="$HOME/.local/bin" ./build-ponyc-suite.sh
 
 # Build with core ctest verification enabled and 4 parallel jobs
 RUN_TESTS=1 JOBS=4 ./build-ponyc-suite.sh
 ```
+
 ## Acknowledgments
 
 - Built for the [Pony programming language](https://ponylang.io) and the official [`ponylang/ponyc`](https://github.com/ponylang/ponyc) compiler.
 - Build flags, sanitizer combinations, and platform presets are derived from the official [Building `ponyc` from Source](https://www.ponylang.io/contribute/compiler/building-ponyc-from-source/) and [Custom `ponyc` Builds](https://ponylang.io/use/compiler/custom-ponyc-builds/) documentation.
 - Special thanks to the **Pony Developers & Contributors** for maintaining the CMake presets and `PonyUses.cmake` build infrastructure.
-
